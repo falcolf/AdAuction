@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("customUserDetailsService")
 public class CustomUserService implements UserDetailsService{
  
-    @Autowired
+    /*@Autowired
     private UserService userService;
      
     @Transactional(readOnly=true)
@@ -24,4 +24,4 @@ public class CustomUserService implements UserDetailsService{
         }
             return new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword(), 
                  user.getState().equals("Active"), true, true, true, getGrantedAuthorities(user));
-    }
+    */}
