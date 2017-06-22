@@ -26,6 +26,7 @@ public class UserDao {
 	}
 	public void regUser(User u){
 		u.setState(State.INACTIVE.getState());
+		
 		getSession().save(u);
 		System.out.println("saved");
 	}
@@ -46,8 +47,6 @@ public class UserDao {
 	public List<User> getAllUsers(){
 		List<User> luser=new ArrayList<User>();
 		Criteria cr=getSession().createCriteria(User.class);
-		Criterion ct=Restrictions.eq("type", UserProfileType.USER.getUserProfileType());
-		cr.add(ct);
 		luser=cr.list();
 		
 		return luser;
@@ -59,6 +58,6 @@ public class UserDao {
 		while(it.hasNext()){
 			this.deleteUser(it.next());
 		}
-		System.out.println("Deleted All Users!");
+		System.out.println("All Users Deleted !");
 	}
 }

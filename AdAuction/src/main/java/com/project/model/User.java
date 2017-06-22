@@ -1,19 +1,29 @@
 package com.project.model;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="AUCTION_USERS")
 public class User {
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="USER_ID")
+	private int id;
 	
 	@Column(name="NAME",nullable=false)
 	private String name;
 	
-	@Id @Column(name="EMAIL" , unique=true , nullable=false)
+	@Column(name="EMAIL" , unique=true , nullable=false)
 	private String email;
 	
 	@Column(name="PASSWORD",nullable=false)
@@ -25,8 +35,11 @@ public class User {
 	@Column(name="STATE",nullable=false)
 	private String state=State.INACTIVE.getState();
 	
-	@Column(name="ACC_TYPE",nullable=false)
-	private String type=UserProfileType.USER.getUserProfileType();
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="USER_PROFILE",
+	joinColumns={@JoinColumn(name="USER_ID")},
+	inverseJoinColumns={@JoinColumn(name="USER_ID")})
+	private Set<UserProfile> upros=new HashSet<UserProfile>();
 	
 	public String getName() {
 		return name;
@@ -67,5 +80,23 @@ public class User {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Set<UserProfile> getUpros() {
+		return upros;
+	}
+
+	public void setUpros(Set<UserProfile> upros) {
+		this.upros = upros;
+	}
+	
+
 
 }
