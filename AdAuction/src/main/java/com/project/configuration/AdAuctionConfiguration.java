@@ -13,19 +13,19 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.project")
-public class MvcConfig extends WebMvcConfigurerAdapter {
-     
-    @Bean(name="Mvc")
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
- 
-        return viewResolver;
-    }
- 
-    /*
+public class AdAuctionConfiguration extends WebMvcConfigurerAdapter {
+	
+	@Bean(name="AdAution")
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setViewClass(JstlView.class);
+		viewResolver.setPrefix("/WEB-INF/views/");
+		viewResolver.setSuffix(".jsp");
+
+		return viewResolver;
+	}
+
+	/*
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      *
      */
@@ -33,5 +33,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
-    
 }

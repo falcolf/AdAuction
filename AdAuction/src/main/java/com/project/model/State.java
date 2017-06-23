@@ -12,4 +12,8 @@ public enum State {
 	public String getState(){
 		return this.state;
 	}
+	public String getName(){
+		return this.name();
+	}
+
 }

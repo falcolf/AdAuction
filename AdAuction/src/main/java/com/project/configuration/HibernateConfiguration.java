@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.demo.configuration" })
+@ComponentScan({ "com.project.configuration" })
 @PropertySource(value = { "classpath:application.properties" })
-public class HibernateConfig{
+public class HibernateConfiguration{
  
     @Autowired
     private Environment environment;
@@ -29,7 +29,7 @@ public class HibernateConfig{
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.demo.model" });
+        sessionFactory.setPackagesToScan(new String[] { "com.project.model"  });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }
