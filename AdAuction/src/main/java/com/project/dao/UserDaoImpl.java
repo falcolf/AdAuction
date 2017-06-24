@@ -32,8 +32,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	@Override
 	public void regUser(User user) {
-		user.setState(State.INACTIVE.getState());
-		
 		getSession().save(user);
 		System.out.println("saved");
 		

@@ -11,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="AUCTION_USERS")
 public class User {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@Column(name="NAME",nullable=false)
@@ -32,13 +34,16 @@ public class User {
 	private String adhaarno;
 	
 	@Column(name="STATE",nullable=false)
-	private String state=State.INACTIVE.getState();
-	
+	private String state;
+	/*
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="AUCTION_USER_USER_PROFILE",
 	joinColumns={@JoinColumn(name="USER_PROFILE_ID")},
 	inverseJoinColumns={@JoinColumn(name="USER_ID")})
 	private Set<UserProfile> upros=new HashSet<UserProfile>();
+	*/
+	@Column(name="TYPE_ID",nullable=false)
+	private int typeid;
 	
 	public String getName() {
 		return name;
@@ -88,13 +93,14 @@ public class User {
 		this.id = id;
 	}
 
-	public Set<UserProfile> getUpros() {
+	/*public Set<UserProfile> getUpros() {
 		return upros;
 	}
 
 	public void setUpros(Set<UserProfile> upros) {
 		this.upros = upros;
 	}
+	*/
 	
 	@Override
 	public int hashCode() {
@@ -103,6 +109,14 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
+	}
+
+	public int getTypeid() {
+		return typeid;
+	}
+
+	public void setTypeid(int typeid) {
+		this.typeid = typeid;
 	}
 
 	@Override
@@ -127,7 +141,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password
-				+ ", Name=" + name +  ", Adhaar Number=" + adhaarno + ", state=" + state + ", userProfiles=" + upros +"]";
+				+ ", Name=" + name +  ", Adhaar Number=" + adhaarno + ", state=" + state + ", userProfiles=" + typeid +"]";
 	}
 	
 

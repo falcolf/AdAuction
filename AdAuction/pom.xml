@@ -12,10 +12,25 @@
         <springframework.version>4.0.6.RELEASE</springframework.version>
         <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
+        <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
     </properties>
   
   
   <dependencies>
+  
+   <!-- jsr303 validation dependencies-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>
   
   <!-- Spring -->
 		<dependency>

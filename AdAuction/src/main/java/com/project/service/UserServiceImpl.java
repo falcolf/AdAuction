@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public void registerUser(User u) {
 		dao.regUser(u);
 		

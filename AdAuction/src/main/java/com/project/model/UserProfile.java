@@ -5,15 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="USER_PROFILE")
 public class UserProfile {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	private int id;
+	
 	@Column(name="TYPE",length=15,unique=true,nullable=false)
 	private String type=UserProfileType.USER.getUserProfileType();
+	
 	public int getId() {
 		return id;
 	}

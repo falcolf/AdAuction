@@ -4,12 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>AdAuction</title>
+<title>home</title>
 </head>
 <body>
-<center><h1>WELCOME TO AdAuction</h1></center>
-<a href="signup">Register page</a>
-<a href="login">Login page</a>
-${registration}
+		Home Page 
+		${error}
 </body>
 </html>
