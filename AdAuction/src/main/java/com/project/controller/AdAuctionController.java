@@ -38,7 +38,6 @@ public class AdAuctionController {
      
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
-		model.addAttribute("registration","" );
 		model.addAttribute("greeting", "Hi, Welcome to mysite");
 		return "welcome";
 	}
@@ -56,7 +55,7 @@ public class AdAuctionController {
 			return "regform";
 		}
 		this.addUser(user);
-		model.addAttribute("registration","User via email address "+user.getEmail()+" registered successfully" );
+		model.addAttribute("message","User via email address "+user.getEmail()+" registered successfully" );
 		return "welcome"; //change appropriately
 	}
 	
@@ -67,20 +66,26 @@ public class AdAuctionController {
 		model.addAttribute("id",id);
 		User u=userService.getUserDetails(id);
 		model.addAttribute("email",u.getEmail());
+		if(u.getState().equals(State.ACTIVE.getState())){
+			model.addAttribute("message",u.getName()+" , you already have the account activated.");
+			return "welcome";
+		}
+			
 		return "otp";
 	}
 	@RequestMapping(value="/activate",method=RequestMethod.POST)
 	public String activatePage(@Valid Otpact usero , BindingResult result , ModelMap model){
-		System.out.println(usero.getEmail()+usero.getOtp()+usero.getId());
 		if(result.hasErrors()){
-			model.addAttribute("message","Error" );
+			model.addAttribute("message","Error has occured while activation.<br>Please contact us on complaints.adauction@gmail.com<br>" );
+			
 		}
 		if(this.activateUser(usero)){
-			model.addAttribute("message","activated" );
+			model.addAttribute("message","Your Account with Email Id as "+usero.getEmail()+" has been activated successfully!" );
+			
 		}else
-			model.addAttribute("message","Otp Failure" );
+			model.addAttribute("message","Your Account with Email Id as "+usero.getEmail()+" could not be activated !" );
 		
-		return "temp"; //change appropriately
+		return "welcome"; //change appropriately
 	}
 	
 	
@@ -146,11 +151,11 @@ public class AdAuctionController {
 		u.setAdhaarno(nuser.getAdhaarno());
 		u.setState(State.INACTIVE.getState());
 		u.setTypeid(2);
-		System.out.println(u);
+		
 		userService.registerUser(u);
 		ProduceMail pm=new ProduceMail();
 		String otp=this.OTPproducer();
-		pm.OTPmail(u.getName(), u.getEmail(),otp ,otpurl+u.getEmail());
+		pm.OTPmail(u.getName(), u.getEmail(),otp ,otpurl+u.getId());
 		this.assignOtp(u.getEmail(),otp);
 	}
 	public void assignOtp(String email, String otp){

@@ -16,10 +16,11 @@ public class OtpDaoImpl extends AbstractDao<Integer, Otp> implements OtpDao{
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("email", eo.getEmail()));
 		Otp o=(Otp)crit.uniqueResult();
-		if(o.getOtp().equals(eo.getOtp()))
-			return true;
-		else 
+		if(o.getOtp().equals(eo.getOtp())){
 			getSession().delete(o);
+			return true;
+		}
+		else 
 			return false;
 		
 	}

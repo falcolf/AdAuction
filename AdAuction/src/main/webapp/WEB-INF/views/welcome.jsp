@@ -8,8 +8,10 @@
 </head>
 <body>
 <center><h1>WELCOME TO AdAuction</h1></center>
-<a href="signup">Register page</a>
-<a href="login">Login page</a>
-${registration}
+<pre>
+<a href="signup">Register page</a>     <a href="login">Login page</a>
+
+${message}
+</pre>
 </body>
 </html>
