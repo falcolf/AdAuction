@@ -30,17 +30,13 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException {
 		User user = userService.getUserDetails(email);
-		System.out.println("User : "+user);
 		if(user==null){
 			System.out.println("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
 			return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), 
-				 user.getState().equals("Active"), true, true, true, getGrantedAuthorities(user));
+				 user.getState().equals("ACTIVE"), true, true, true, getGrantedAuthorities(user));
 	}
-	
-	
-
 	
 	private List<GrantedAuthority> getGrantedAuthorities(User user){
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -50,6 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 			authorities.add(new SimpleGrantedAuthority("ROLE_"+userProfile.getType()));
 		}
 		*/
+		
 		if(user.getTypeid()==1)
 			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		else

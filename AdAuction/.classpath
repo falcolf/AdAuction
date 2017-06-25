@@ -28,8 +28,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Security"/>
 	<classpathentry kind="lib" path="G:/Jars/Mail/activation.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -40,12 +38,12 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="G:/Jars/Mail/SendMail.jar">
+	<classpathentry kind="lib" path="G:/Jars/Database Files/ojdbc6.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="G:/Jars/Database Files/ojdbc6.jar">
+	<classpathentry kind="lib" path="C:/Users/parth-pc/Desktop/AuctionMail.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

@@ -8,7 +8,7 @@ public interface UserDao {
 	User findById(int id);
 	User findByEmail(String email);
 	void regUser(User user);
-	void activateUser(String email);
+	void setActiveUser(String email);
 	void deleteUser(String email);
 	List<User> getAllUsers();
 }

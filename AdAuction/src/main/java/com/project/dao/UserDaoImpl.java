@@ -38,7 +38,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 	}
 
 	@Override
-	public void activateUser(String email) {
+	public void setActiveUser(String email) {
 		User u=this.findByEmail(email);
 		u.setState(State.ACTIVE.getState());
 		getSession().update(u);

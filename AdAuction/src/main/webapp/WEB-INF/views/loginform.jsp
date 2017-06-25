@@ -10,6 +10,7 @@
 	</head>
 
 	<body>
+	${activation}
 		<div id="mainWrapper">
 			<div class="login-container">
 				<div class="login-card">
@@ -18,7 +19,7 @@
 						<form action="${loginUrl}" method="post" class="form-horizontal">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
-									<p>Invalid username and password.</p>
+									<p>Please make Sure to check your credentials and Activate your account before you login</p>
 								</div>
 							</c:if>
 							<c:if test="${param.logout != null}">
@@ -27,8 +28,8 @@
 								</div>
 							</c:if>
 							<div class="input-group input-sm">
-								<label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-								<input type="text" class="form-control" id="username" name="email" placeholder="Enter Email" required>
+								<label class="input-group-addon" for="email"><i class="fa fa-user"></i></label>
+								<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required>
 							</div>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
