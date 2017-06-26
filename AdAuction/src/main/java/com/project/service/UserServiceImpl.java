@@ -41,11 +41,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
-		return dao.getAllUsers();
-	}
-
-	@Override
 	public boolean activateUser(Otpact ou) {
 		
 		return dao2.activateUser(ou);
@@ -61,6 +56,12 @@ public class UserServiceImpl implements UserService{
 	public User getUserDetails(int id) {
 		// TODO Auto-generated method stub
 		return dao.findById(id);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		dao.updateUser(user);
+		
 	}
 
 	

@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>home</title>
+<title>View All Auctions</title>
 </head>
 <body>
-		Home Page 
-		${error}
+		Under development...
 </body>
 </html>

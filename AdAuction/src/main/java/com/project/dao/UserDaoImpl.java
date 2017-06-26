@@ -51,11 +51,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		//List<User> luser=new ArrayList<User>();
-		//Criteria crit = createEntityCriteria();
-		//luser=crit.list();
-		return null;
+	public void updateUser(User user) {
+		getSession().update(user);
 	}
+
+	
 	
 }

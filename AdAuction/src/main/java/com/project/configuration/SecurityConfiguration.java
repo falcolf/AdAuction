@@ -17,6 +17,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 	
+	 @Autowired
+	 CustomSuccessHandler customSuccessHandler;
+	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
@@ -29,11 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	  .antMatchers("/admin/**").access("hasRole('ADMIN')")
     	  .antMatchers("/user/**").access("hasRole('USER')")
     	  .and()
-    	  .formLogin().loginPage("/login")
+    	  .formLogin().loginPage("/login").successHandler(customSuccessHandler)
     	  .usernameParameter("email").passwordParameter("password")
     	  .and()
     	  .logout().logoutSuccessUrl("/login?logout") 
-    	  .and().exceptionHandling().accessDeniedPage("/Access_Denied")
+    	  .and().exceptionHandling().accessDeniedPage("/accessDenied")
     	  .and().csrf();
     }
 	

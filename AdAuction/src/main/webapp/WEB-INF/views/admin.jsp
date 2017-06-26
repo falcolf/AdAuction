@@ -6,7 +6,25 @@
 	<title>Admin page</title>
 </head>
 <body>
-	Dear <strong>${user}</strong>, Welcome to Admin Page.
-	<a href="<c:url value="/logout" />">Logout</a>
+	
+	<p align="right">
+	<a href="<c:url value='/logout' />">Logout</a>
+	</p>
+	<br>
+	Welcome to Admin Page.
+	<br>
+	<br>
+	${message}
+	<br
+	><br>
+	<ul>
+		<li><a href="admin/new">Start Auction For a website</a></li>
+		<li><a href="admin/addAdmin">Add a new Admin account</a></li>
+		<li><a href="admin/viewall">View All Progresses</a></li>
+	</ul>
+	
+	
+	
+	
 </body>
 </html>

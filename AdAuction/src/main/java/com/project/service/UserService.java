@@ -13,5 +13,6 @@ public interface UserService {
 	public void setActiveUser(String email);
 	public boolean activateUser(Otpact ou);
 	public void saveOtp(Otp otp);
-	public List<User> getAllUsers();
+	public void updateUser(User user);
+	
 }

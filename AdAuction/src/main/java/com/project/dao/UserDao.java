@@ -10,5 +10,5 @@ public interface UserDao {
 	void regUser(User user);
 	void setActiveUser(String email);
 	void deleteUser(String email);
-	List<User> getAllUsers();
+	void updateUser(User user);
 }

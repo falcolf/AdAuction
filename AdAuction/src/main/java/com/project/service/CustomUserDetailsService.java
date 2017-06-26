@@ -52,7 +52,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		else
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		
-		System.out.print("authorities :"+authorities);
+		
 		return authorities;
 	}
 	
