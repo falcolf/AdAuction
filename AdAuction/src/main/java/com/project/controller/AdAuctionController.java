@@ -29,10 +29,11 @@ import com.project.model.User;
 import com.project.service.AuctionService;
 import com.project.service.UserService;
 import sendmail.ProduceMail;
+
 @Controller
 public class AdAuctionController {
 	
-	final String otpurl="192.168.1.6:8087/AdAuction/activationid=";
+	final String otpurl="192.168.1.6:8089/AdAuction/activationid=";
 	User accessor;
 	
 	@Resource(name = "userService")
@@ -41,6 +42,8 @@ public class AdAuctionController {
 	@Resource(name="auctionService")
 	private AuctionService auctionService;
      
+	
+	
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to mysite");
@@ -68,7 +71,7 @@ public class AdAuctionController {
 		}
 		this.addUser(user);
 		model.addAttribute("message","User via email address "+user.getEmail()+" registered successfully" );
-		return "welcome"; //change appropriately
+		return "nav"; //change appropriately
 	}
 	
 	@RequestMapping(value = "/activationid={id}", method = RequestMethod.GET)
@@ -79,8 +82,8 @@ public class AdAuctionController {
 		User u=userService.getUserDetails(id);
 		model.addAttribute("email",u.getEmail());
 		if(u.getState().equals(State.ACTIVE.getState())){
-			model.addAttribute("message",u.getName()+" , you already have the account activated.");
-			return "welcome";
+			model.addAttribute("message",u.getName()+" , you already have your account , "+u.getEmail()+" activated.");
+			return "nav";
 		}
 		return "otp";
 	}
@@ -91,36 +94,21 @@ public class AdAuctionController {
 			model.addAttribute("message","Error has occured while activation.<br>Please contact us on complaints.adauction@gmail.com<br>" );
 		}
 		if(this.activateUser(usero)){
-			model.addAttribute("message","Your Account with Email Id as "+usero.getEmail()+" has been activated successfully!" );
+			model.addAttribute("message","Your Account with Email Id : "+usero.getEmail()+" has been activated successfully!" );
 		}else{
 			model.addAttribute("message","Invalid OTP" );
 			return "otp";
 		}
-		return "welcome"; //change appropriately
+		return "nav"; //change appropriately
 	}
-	
-	
-	/*
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String loginUser(@Valid NewUser user , BindingResult result , ModelMap model,HttpSession ss){
-		if(result.hasErrors()){
-			return "form";
-		}
-		System.out.println(user);
-		
-		return "welcome"; //change appropriately
-	}*/
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		return "loginform";
-}
-	
+	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model) {
-		accessor=userService.getUserDetails(this.getAccesser());
-		model.addAttribute("user", accessor.getName());
 		return "admin";
 	}
 	
@@ -146,7 +134,7 @@ public class AdAuctionController {
 		}
 		addData(data);
 		model.addAttribute("message","Auction Registered" );
-		return "admin"; //change appropriately
+		return "nav"; //change appropriately
 	}	
 	
 	@RequestMapping(value="/admin/addAdmin",method=RequestMethod.GET)
@@ -159,14 +147,13 @@ public class AdAuctionController {
 	public String assignAdmin(@Valid @ModelAttribute("user")User user , BindingResult result , ModelMap model){
 		if(result.hasErrors()){
 			model.addAttribute("mess","Error" );
-		
-			return "newauction";
+			return "addAdmin";
 		}
 		user=userService.getUserDetails(user.getEmail());
 		user.setTypeid(1);
 		userService.updateUser(user);
 		model.addAttribute("message","User "+user.getName()+" Email : "+user.getEmail()+" assigned as Admin" );
-		return "admin"; //change appropriately
+		return "nav"; //change appropriately
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -177,6 +164,33 @@ public class AdAuctionController {
 		model.addAttribute("aucs",aucs);
 		model.addAttribute("user", accessor.getName());
 		return "user";
+	}
+	
+	
+	@RequestMapping(value = "/bid={id}", method = RequestMethod.GET)
+	public String bidPage(ModelMap model,@PathVariable int id) {
+		Auction auction=auctionService.getDetails(id);
+		model.addAttribute("auction",auction);
+		return "bid";
+	}
+	
+	@RequestMapping(value="/confBid",method=RequestMethod.POST)
+	public String confBidPage( @Valid @ModelAttribute("auction")Auction auction , BindingResult result , ModelMap model){
+		if(result.hasErrors()){
+			model.addAttribute("message","Error" );
+			return "bid";
+		}
+		Auction prev=auctionService.getDetails(auction.getId());
+		if(prev.getCurrbid()>auction.getCurrbid()){
+			model.addAttribute("message","Amount should be greater than previous bid");
+			return "bid";
+		}
+		
+		prev.setCurrbid(auction.getCurrbid());
+		prev.setHighbidder(getAccesser());
+		auctionService.updateBid(prev);
+		model.addAttribute("message","Bid Successfull");
+		return "nav"; //change appropriately
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -250,7 +264,6 @@ public class AdAuctionController {
 		Calendar cal=Calendar.getInstance();
 		Date date = start.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        System.out.println( "The date is: "+  sdf.format( start.getTime() )+" "+sdf.format(end.getTime())  );
         adata.setStarttime(start.getTime());
 		adata.setEndtime(end.getTime());
 		auctionService.scheduleAuction(adata);

@@ -9,4 +9,5 @@ public interface AuctionDao {
 	public void endAuction(Auction data);
 	public void updateBid(Auction data);
 	public List<Auction> getAllAuctions();
+	public void refreshList();
 }

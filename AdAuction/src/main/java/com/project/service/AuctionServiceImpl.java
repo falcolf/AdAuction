@@ -44,4 +44,10 @@ public class AuctionServiceImpl implements AuctionService{
 		return dao.getAllAuctions();
 	}
 
+	@Override
+	public void refreshList() {
+		dao.refreshList();
+		
+	}
+
 }

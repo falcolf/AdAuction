@@ -8,6 +8,12 @@
 <title>Auction Page</title>
 </head>
 <body>
+
+	<%
+       response.setIntHeader("Refresh", 15);
+	%>
+
+
 	<p>
 	
 	Logged in as : <strong>${user}</strong> 
@@ -40,12 +46,12 @@
     		<tr>
 				<td><c:out value="${auc.id}"/></td>
 				<td><c:out value="${auc.name}"/></td>
-				<td><c:out value="${auc.url}"/></td>
+				<td><a href='<c:out value="${auc.url}"/>'><c:out value="${auc.url}"/></a></td>
 				<td><c:out value="${auc.type}"/></td>
 				<td><c:out value="${auc.starttime}"/></td>
 				<td><c:out value="${auc.endtime}"/></td>
 				<td><c:out value="${auc.currbid}"/></td>
-				<td><c:out value="hello "/></td>
+				<td><a href='bid=<c:out value="${auc.id}"/> '>CLICK HERE</a></td>
 		
 			</tr>
 		

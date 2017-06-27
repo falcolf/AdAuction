@@ -10,4 +10,5 @@ public interface AuctionService {
 	public Auction getDetails(int id);
 	public void updateBid(Auction data);
 	public List<Auction> getAllAuc();
+	public void refreshList();
 }
