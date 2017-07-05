@@ -16,7 +16,7 @@ import sendmail.ProduceMail;
 @Repository("auctionDao")
 public class AuctionDaoImpl extends AbstractDao<Integer,Auction> implements AuctionDao {
 
-	final String url="192.168.1.6:8089/AdAuction/user/paymets";
+	final String url="192.168.1.6:8085/AdAuction/user/paymets";
 	@Override
 	public void scheduleAuction(Auction data) {
 		getSession().save(data);

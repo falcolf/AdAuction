@@ -20,7 +20,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, Otp> implements OtpDao{
 			getSession().delete(o);
 			return true;
 		}
-		else 
+		else  
 			return false;
 		
 	}

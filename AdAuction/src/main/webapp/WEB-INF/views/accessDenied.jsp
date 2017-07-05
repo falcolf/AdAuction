@@ -6,7 +6,12 @@
 	<title>AccessDenied page</title>
 </head>
 <body>
+	<h1 style="color: red">Error</h1>
+	<h6>Access Denied</h6>
 	<strong>${user}</strong>, <br>You are not authorized to access this page<br>
-	<a href="<c:url value="/logout" />">Logout</a>
+	<ol>
+		<li><a href="/welcome">Welcome Page</a></li>
+		<li><a href="/login">Login Page</a></li>
+	</ol>
 </body>
 </html>

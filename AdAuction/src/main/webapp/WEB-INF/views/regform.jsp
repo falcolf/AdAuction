@@ -1,79 +1,45 @@
-<!DOCTYPE html >
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-
-<html>
+<jsp:useBean id="now" class="java.util.Date" />
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
- 	<title>User Form</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/custom.css' />" rel="stylesheet"></link>
+<meta charset="utf-8">
+<title>Registration Page</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="<c:url value='/static/css/regform.css' />" rel="stylesheet"></link>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-	<div class="form-container">
-     
-    <h1>Form</h1>
-     
-    <form:form method="POST" action="register" modelAttribute="user" class="form-horizontal">
- 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="Name">Name</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="name" id="name" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="name" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
- 		<div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="Email">E-Mail</label>
-                <div class="col-md-7">
-                    <form:input type="email" path="email" id="email" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="email" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="Password">Password</label>
-                <div class="col-md-7">
-                    <form:input type="password" path="password" id="password" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="password" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="adhaarno">Adhaar Number</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="adhaarno" id="adhaarno" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="adhaarno" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
-        <div class="row">
-            <div class="form-actions floatRight">
-                <input type="submit" value="Register" class="btn btn-primary btn-sm">
-            </div>
-        </div>
-    </form:form>
-    </div>
+<div class="testbox">
+  <h1>Registration</h1>
+
+  <form:form action="register" modelAttribute="user" method="post">
+      <hr>
+  <label id="icon" for="email"><i class="icon-envelope "></i></label>
+  <form:input type="text" path="email" name="email" id="email" placeholder="Email" required="true" />
+  <label id="icon" for="adhaarno"><i class="icon-credit-card"></i></label>
+    <form:input type="text" path="adhaarno" name="adhaarno" id="adhaarno" placeholder="Adhaar Number" required="true" />
+   <label id="icon" for="name"><i class="icon-user"></i></label>
+  <form:input type="text" name="name" path="name" id="name" placeholder="Name" required="true"/>
+  <label id="icon" for="password"><i class="icon-shield"></i></label>
+  <form:input type="password" name="password" path="password" id="password"  placeholder="Password" required="true"/>
+    
+    <br>
+   <p> Already A Member? <a href="login">Login Here</a>.</p>
+  <input type="submit" class="button" value="Register" />
+  </form:form>
+</div>
+<br><br><br>
+<hr>
+${message }
+	
+
 </body>
 </html>
+
+

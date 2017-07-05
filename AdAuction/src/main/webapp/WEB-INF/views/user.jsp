@@ -1,34 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="<c:url value='/static/css/home.css' />" rel="stylesheet"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Auction Page</title>
 </head>
 <body>
-
+	<jsp:directive.include file = "nav.jsp" />
+	<base href="/AdAuction/user/" />
 	<%
-       response.setIntHeader("Refresh", 15);
+       response.setIntHeader("Refresh", 10);
 	%>
-
-
-	<p>
-	
-	Logged in as : <strong>${user}</strong> 
-	
-	</p>
-	<p align="right">
-	<a href="<c:url value="/logout" />">Logout</a>
-	</p>
+	<hr>
 	<br>
-	Welcome to User Page.
-	
-	
-	<table border="dashed">
-	
-	
+	${message}
+	<br>
+	<hr>
+	<table >
 		<tr>
 			<th>ID</th>
 			<th>Website</th>
@@ -39,10 +31,7 @@
 			<th>Current Bid</th>
 			<th>Bid?</th>
 		</tr>
-		
-		
 		<c:forEach items="${aucs}" var="auc">    
-    		
     		<tr>
 				<td><c:out value="${auc.id}"/></td>
 				<td><c:out value="${auc.name}"/></td>
@@ -52,16 +41,8 @@
 				<td><c:out value="${auc.endtime}"/></td>
 				<td><c:out value="${auc.currbid}"/></td>
 				<td><a href='bid=<c:out value="${auc.id}"/> '>CLICK HERE</a></td>
-		
-			</tr>
-		
-    		
-    		
-    		
+		</tr>
 		</c:forEach>
-		
-		
 	</table>
-	
 </body>
 </html>

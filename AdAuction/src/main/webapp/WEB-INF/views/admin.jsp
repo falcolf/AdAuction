@@ -1,30 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html >
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Admin page</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="<c:url value='/static/css/home.css' />" rel="stylesheet"></link>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Auction Page</title>
 </head>
 <body>
-	
-	<p align="right">
-	<a href="<c:url value='/logout' />">Logout</a>
-	</p>
-	<br>
-	Welcome to Admin Page.
-	<br>
+	<jsp:directive.include file = "adminnav.jsp" />
+	<base href="/AdAuction/admin/" />
+	<hr>
 	<br>
 	${message}
-	<br
-	><br>
+	<br>
+	<hr>
 	<ul>
-		<li><a href="admin/new">Start Auction For a website</a></li>
-		<li><a href="admin/addAdmin">Add a new Admin account</a></li>
-		<li><a href="admin/viewall">View All Progresses</a></li>
+		<li><a href="new" style="color:white">Start Auction For a website</a></li>
+		<li><a href="addAdmin" style="color:white">Add a new Admin account</a></li>
+		<li><a href="viewall" style="color:white">View All Progresses</a></li>
 	</ul>
-	
-	
-	
-	
 </body>
 </html>

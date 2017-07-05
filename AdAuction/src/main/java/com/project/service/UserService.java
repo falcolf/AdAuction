@@ -14,5 +14,7 @@ public interface UserService {
 	public boolean activateUser(Otpact ou);
 	public void saveOtp(Otp otp);
 	public void updateUser(User user);
+	public boolean checkEmailDup(String email);
+	public boolean checkAdhaarDup(String adhaarno);
 	
 }

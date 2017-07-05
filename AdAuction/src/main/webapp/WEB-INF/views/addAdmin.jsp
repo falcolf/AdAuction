@@ -1,52 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
- 	<title>Add Admin</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/custom.css' />" rel="stylesheet"></link>
+<meta charset="utf-8">
+<title>Assign Admin Page</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="<c:url value='/static/css/home.css' />" rel="stylesheet"></link>
+<link href="<c:url value='/static/css/form.css' />" rel="stylesheet"></link>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-	
-	<div class="form-container">
-     
-    <h1>Add Admin Form</h1>
-    
-    
-    ${message}
-    
-     Enter Email for the User to make ADMIN type
-     
-    <form:form method="GET" action="assignAdmin" modelAttribute="user" class="form-horizontal">
- 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="email">E-Mail</label>
-                <div class="col-md-7">
-                    <form:input type="email" path="email" id="email" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="email" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
- 		
- 		
-        <div class="row">
-            <div class="form-actions floatRight">
-                <input type="submit" value="Assign" class="btn btn-primary btn-sm">
-            </div>
-        </div>
-    </form:form>
-    </div>
+<jsp:directive.include file = "adminnav.jsp" />
+	<div class="testbox">
+  <h1>Add Admin</h1>
+  
+<form:form action="assignAdmin" modelAttribute="user" method="post">
+<hr>
+  <label id="icon" for="email"><i class="icon-envelope "></i></label>
+  <form:input type="text" name="email" path="email" id="email" required="true"/>
+  <input type="submit" class="button" value="Assign" />
+  </form:form>
+</div>
+
+<br><br><br>
+<hr>
+${message }
+
 </body>
 </html>
+
+
+

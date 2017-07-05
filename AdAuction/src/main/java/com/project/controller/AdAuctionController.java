@@ -33,8 +33,9 @@ import sendmail.ProduceMail;
 @Controller
 public class AdAuctionController {
 	
-	final String otpurl="192.168.1.6:8089/AdAuction/activationid=";
+	final String otpurl="192.168.1.6:8085/AdAuction/activationid=";
 	User accessor;
+	int uid=0;
 	
 	@Resource(name = "userService")
 	private UserService userService;
@@ -42,11 +43,8 @@ public class AdAuctionController {
 	@Resource(name="auctionService")
 	private AuctionService auctionService;
      
-	
-	
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
-		model.addAttribute("greeting", "Hi, Welcome to mysite");
 		return "welcome";
 	}
 	
@@ -69,37 +67,67 @@ public class AdAuctionController {
 		if(result.hasErrors()){
 			return "regform";
 		}
-		this.addUser(user);
-		model.addAttribute("message","User via email address "+user.getEmail()+" registered successfully" );
-		return "nav"; //change appropriately
+		if(userService.checkEmailDup(user.getEmail())){
+			model.addAttribute("message","User already Registered");
+		}else{
+			if(userService.checkAdhaarDup(user.getAdhaarno())){
+				model.addAttribute("message", "Adhaar Number already registered with another email address");
+			}
+			else{
+				try{
+					this.addUser(user);
+					model.addAttribute("message","Registered\nOTP link: "+otpurl+uid);
+					return "loginform";
+					
+				}catch(Exception e){
+					model.addAttribute("message", e);
+				}
+			}
+		}
+		return "regform";
+		
 	}
 	
 	@RequestMapping(value = "/activationid={id}", method = RequestMethod.GET)
 	public String otpPage(ModelMap model,@PathVariable int id) {
-		Otpact usero=new Otpact();
-		model.addAttribute("usero",usero);
-		model.addAttribute("id",id);
-		User u=userService.getUserDetails(id);
-		model.addAttribute("email",u.getEmail());
-		if(u.getState().equals(State.ACTIVE.getState())){
-			model.addAttribute("message",u.getName()+" , you already have your account , "+u.getEmail()+" activated.");
-			return "nav";
+		try{
+			Otpact usero=new Otpact();
+			model.addAttribute("usero",usero);
+			model.addAttribute("id",id);
+			User u=userService.getUserDetails(id);
+			model.addAttribute("email",u.getEmail());
+			if(u.getState().equals(State.ACTIVE.getState())){
+				model.addAttribute("message",u.getName()+" , you already have your account , "+u.getEmail()+" activated.");
+				return "loginform";
+			}
+			return "otp";
+		}catch(Exception e){
+			model.addAttribute("message","No User With id "+id+" exists");
+			return "loginform";
 		}
-		return "otp";
+		
+		
 	}
 	
 	@RequestMapping(value="/activate",method=RequestMethod.POST)
 	public String activatePage(@Valid @ModelAttribute("usero") Otpact usero , BindingResult result , ModelMap model){
 		if(result.hasErrors()){
-			model.addAttribute("message","Error has occured while activation.<br>Please contact us on complaints.adauction@gmail.com<br>" );
+			model.addAttribute("message","Error has occured while activation\nPlease contact us on complaints.adauction@gmail.com" );
+			return "loginform";
 		}
-		if(this.activateUser(usero)){
-			model.addAttribute("message","Your Account with Email Id : "+usero.getEmail()+" has been activated successfully!" );
-		}else{
-			model.addAttribute("message","Invalid OTP" );
+		try{
+			if(this.activateUser(usero)){
+				model.addAttribute("message","Your Account with Email Id : "+usero.getEmail()+" has been activated successfully!" );
+				return "loginform";
+			}else{
+				model.addAttribute("message","Invalid OTP" );
+				return "loginform";
+			}
+		}catch(Exception e){
+			model.addAttribute("message",e);
 			return "otp";
 		}
-		return "nav"; //change appropriately
+		 //change appropriately
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -109,6 +137,15 @@ public class AdAuctionController {
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model) {
+		
+		try{
+			accessor=userService.getUserDetails(this.getAccesser());
+			model.addAttribute("user",accessor.getName());
+		}catch(Exception e){
+			model.addAttribute("message","There was some error completing request : "+e);
+			return "admin";
+		}
+		
 		return "admin";
 	}
 	
@@ -126,15 +163,19 @@ public class AdAuctionController {
 		return adtypes;
 	}
 	
-	@RequestMapping(value="/admin/add",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/add",method=RequestMethod.POST)
 	public String savAucData(@Valid @ModelAttribute("data")AucData data , BindingResult result , ModelMap model){
 		if(result.hasErrors()){
-			model.addAttribute("mess","Error" );
+			model.addAttribute("message","Error" );
 			return "newweb";
 		}
-		addData(data);
-		model.addAttribute("message","Auction Registered" );
-		return "nav"; //change appropriately
+		try{
+			addData(data);
+			model.addAttribute("message","Entery Done" );
+		}catch(Exception e){
+			model.addAttribute("message",e);
+		}
+		return "adminDispatcher"; //change appropriately
 	}	
 	
 	@RequestMapping(value="/admin/addAdmin",method=RequestMethod.GET)
@@ -143,54 +184,93 @@ public class AdAuctionController {
 		model.addAttribute("user",u);
 		return "addAdmin";
 	}
-	@RequestMapping(value="/admin/assignAdmin",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/assignAdmin",method=RequestMethod.POST)
 	public String assignAdmin(@Valid @ModelAttribute("user")User user , BindingResult result , ModelMap model){
 		if(result.hasErrors()){
 			model.addAttribute("mess","Error" );
 			return "addAdmin";
 		}
-		user=userService.getUserDetails(user.getEmail());
-		user.setTypeid(1);
-		userService.updateUser(user);
-		model.addAttribute("message","User "+user.getName()+" Email : "+user.getEmail()+" assigned as Admin" );
-		return "nav"; //change appropriately
+		try{
+			user=userService.getUserDetails(user.getEmail());
+			user.setTypeid(1);
+			userService.updateUser(user);
+			model.addAttribute("message","User "+user.getName()+" Email : "+user.getEmail()+" assigned as Admin" );
+		
+		}catch(Exception e){
+			model.addAttribute("message",e);
+			
+		}
+			return "adminDispatcher"; //change appropriately
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userPage(ModelMap model) {
-		accessor=userService.getUserDetails(this.getAccesser());
-		List<Auction> aucs=new ArrayList<Auction>();
-		aucs=auctionService.getAllAuc();
-		model.addAttribute("aucs",aucs);
-		model.addAttribute("user", accessor.getName());
+		
+		try{
+			accessor=userService.getUserDetails(this.getAccesser());
+			List<Auction> aucs=new ArrayList<Auction>();
+			aucs=auctionService.getAllAuc();
+			model.addAttribute("aucs",aucs);
+			model.addAttribute("user", accessor.getName());
+		}catch(Exception e){
+			model.addAttribute("message","There was some error completing request : "+e);
+			return "user";
+		}
+		
 		return "user";
 	}
 	
 	
-	@RequestMapping(value = "/bid={id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/bid={id}", method = RequestMethod.GET)
 	public String bidPage(ModelMap model,@PathVariable int id) {
-		Auction auction=auctionService.getDetails(id);
-		model.addAttribute("auction",auction);
+		try{
+			Auction auction=auctionService.getDetails(id);
+			model.addAttribute("auction",auction);
+		}catch(Exception e){
+			model.addAttribute("message","Auction has already Ended...");
+			return "userDispatcher";
+		}
+		
+		
 		return "bid";
 	}
 	
-	@RequestMapping(value="/confBid",method=RequestMethod.POST)
+	@RequestMapping(value="/user/confBid",method=RequestMethod.POST)
 	public String confBidPage( @Valid @ModelAttribute("auction")Auction auction , BindingResult result , ModelMap model){
 		if(result.hasErrors()){
 			model.addAttribute("message","Error" );
-			return "bid";
 		}
 		Auction prev=auctionService.getDetails(auction.getId());
-		if(prev.getCurrbid()>auction.getCurrbid()){
+		if(prev.getCurrbid()>=auction.getCurrbid()){
 			model.addAttribute("message","Amount should be greater than previous bid");
-			return "bid";
-		}
-		
+		}else{
+		try{
 		prev.setCurrbid(auction.getCurrbid());
 		prev.setHighbidder(getAccesser());
 		auctionService.updateBid(prev);
 		model.addAttribute("message","Bid Successfull");
-		return "nav"; //change appropriately
+		}catch(Exception e){
+			model.addAttribute("message",e);
+			}
+		}
+		try{
+			accessor=userService.getUserDetails(this.getAccesser());
+			List<Auction> aucs=new ArrayList<Auction>();
+			aucs=auctionService.getAllAuc();
+			model.addAttribute("aucs",aucs);
+			model.addAttribute("user", accessor.getName());
+		}catch(Exception e){
+			
+			model.addAttribute("message","There was some error completing request : "+e);
+			
+		}
+		
+		return "userDispatcher";
+	}
+	
+	@RequestMapping(value = "/user/payments", method = RequestMethod.GET)
+	public String paymentsPage(ModelMap model) {
+		return "payments";
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -201,6 +281,7 @@ public class AdAuctionController {
 		}
 		return "redirect:/login?logout";
 	}
+	
 
 	private String getAccesser(){
 		String email = null;
@@ -227,6 +308,7 @@ public class AdAuctionController {
 		ProduceMail pm=new ProduceMail();
 		String otp=this.OTPproducer();
 		pm.OTPmail(u.getName(), u.getEmail(),otp ,otpurl+u.getId());
+		this.uid=u.getId();
 		this.assignOtp(u.getEmail(),otp);
 	}
 	//Function to assign OTP to a user

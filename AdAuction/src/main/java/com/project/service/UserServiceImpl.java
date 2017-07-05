@@ -64,6 +64,22 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-	
-	
+	@Override
+	public boolean checkEmailDup(String email) {
+		User user = dao.findByEmail(email);
+        if (user != null) {
+            return true;
+        }
+        return false;
+    
+	}
+
+	@Override
+	public boolean checkAdhaarDup(String adhaarno) {
+		User user=dao.findByAdhaar(adhaarno);
+		if(user!=null){
+			return true;
+		}
+		return false;
+	}
 }

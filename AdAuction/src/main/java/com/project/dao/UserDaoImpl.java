@@ -55,6 +55,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 		getSession().update(user);
 	}
 
+	@Override
+	public User findByAdhaar(String adhaarno) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("adhaarno", adhaarno));
+		return (User) crit.uniqueResult();
+	}
+
 	
 	
 }

@@ -1,56 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
- 	<title>Account Activation</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/custom.css' />" rel="stylesheet"></link>
+<meta charset="utf-8">
+<title>Activation Page</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="<c:url value='/static/css/form.css' />" rel="stylesheet"></link>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-	
-	<div class="form-container">
-     
-    <h1>OTP Form</h1>
-    
-    
-    ${message}
-    
-     Please Enter The Four digit OTP sent to email address : ${email}
-     
-    <form:form method="POST" action="activate" modelAttribute="usero" class="form-horizontal">
- 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="Name">OTP</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="otp" id="otp" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="otp" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-                    <form:input type="hidden"  id="id" path="id" value="${id}" class="form-control input-sm"/>
-                   <form:input type="hidden"  id="email" path="email" value="${email}" class="form-control input-sm"/>
- 		
- 		
- 		
- 		
-        <div class="row">
-            <div class="form-actions floatRight">
-                <input type="submit" value="Activate" class="btn btn-primary btn-sm">
-            </div>
-        </div>
-    </form:form>
-    </div>
+
+	<div class="testbox">
+  <h1>Activation</h1>
+  
+  <c:if test="${message!=null}">
+  		<script>
+  			alert("${message}");
+  		</script>
+  </c:if>
+  
+
+  <form:form action="activate" modelAttribute="usero" method="post">
+    	
+	<hr>
+  <label id="icon" for="email"><i class="icon-envelope "></i></label>
+  <input type="text" name="email" id="email" value="${email}" readonly/>
+  <label id="icon" for="otp"><i class="icon-unlock-alt"></i></label>
+  <form:input type="text" path="otp" name="otp" id="otp" placeholder="OTP" required="true"/>
+  
+  <form:input type="hidden"  id="id" path="id" value="${id}" />
+  
+  <input type="submit" class="button" value="Activate" />
+  </form:form>
+</div>
 </body>
 </html>
+
