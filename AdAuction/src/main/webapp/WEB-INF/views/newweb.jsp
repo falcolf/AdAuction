@@ -10,7 +10,11 @@
 <head>
 <meta charset="utf-8">
 <title>New Entry Page</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AdAuction">
+    <meta name="author" content="Parth Agarwal">
+    <link rel="icon" href="/AdAuction/static/img/fav.png">
+    <link rel="shortcut icon" href="/AdAuction/static/img/fav.png">
 <link href="<c:url value='/static/css/home.css' />" rel="stylesheet"></link>
 <link href="<c:url value='/static/css/regform.css' />" rel="stylesheet"></link>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>

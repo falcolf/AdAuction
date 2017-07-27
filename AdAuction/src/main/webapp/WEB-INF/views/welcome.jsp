@@ -7,8 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="AdAuction">
     <meta name="author" content="Parth Agarwal">
+    <link rel="icon" href="/AdAuction/static/img/fav.png">
+    <link rel="shortcut icon" href="/AdAuction/static/img/fav.png">
 
     <title>AdAuction</title>
 
@@ -24,8 +26,7 @@
     <link href="<c:url value='/static/color/default.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/team.css' />" rel="stylesheet"></link>
     
-    <link rel="icon" href="/AdAuction/static/img/fav.png">
-    <link rel="shortcut icon" href="/AdAuction/static/img/fav.png">
+    
     
 </head>
 
