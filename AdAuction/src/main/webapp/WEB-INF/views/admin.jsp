@@ -20,7 +20,7 @@
 	<ul>
 		<li><a href="new" style="color:white">Start Auction For a website</a></li>
 		<li><a href="addAdmin" style="color:white">Add a new Admin account</a></li>
-		<li><a href="viewall" style="color:white">View All Progresses</a></li>
+		<li><a href="auctions" style="color:white">View All Progresses</a></li>
 	</ul>
 </body>
 </html>
