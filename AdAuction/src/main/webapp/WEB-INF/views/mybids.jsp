@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <link href="<c:url value='/static/css/home.css' />" rel="stylesheet"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Auction Page</title>
+<title>My Bids</title>
 </head>
 <body>
 	<jsp:directive.include file = "nav.jsp" />
@@ -20,7 +20,7 @@
 	<br>
 	${message}
 	<br>
-	<br>
+	
 	TIME IN <b>UTC</b> FORMAT
 	<br>
 	<br>
@@ -45,7 +45,6 @@
 				<td><c:out value="${auc.starttime}"/></td>
 				<td><c:out value="${auc.endtime}"/></td>
 				<td><c:out value="${auc.currbid}"/></td>
-				<td><a href='bid=<c:out value="${auc.id}"/> '>CLICK HERE</a></td>
 		</tr>
 		</c:forEach>
 	</table>

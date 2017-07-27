@@ -67,6 +67,7 @@
 	max-height: 100%;
 	width: auto;
 	height: auto;
+	display:inline-block;
 	vertical-align: middle;
 }
 .nivo-lightbox-content iframe {

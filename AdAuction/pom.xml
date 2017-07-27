@@ -13,12 +13,34 @@
         <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+        <mysql.connector.version>5.1.31</mysql.connector.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
     </properties>
   
   
   <dependencies>
   
+  <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4</version>
+</dependency>
+
+  
+  	<!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+        
    <!-- jsr303 validation dependencies-->
         <dependency>
             <groupId>javax.validation</groupId>

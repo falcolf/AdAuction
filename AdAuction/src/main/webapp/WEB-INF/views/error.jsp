@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="Refresh" content="3;url=/AdAuction/user">
-<title>redirecting</title>
+<title>Error</title>
 </head>
 <body>
-<h1>Redirecting...</h1>
-	
-	<br><br>
-		${message}
+<h1>ERROR...</h1>
+<hr>
+Details 
+<br>
+<hr>
+Date/Time : ${datetime}<br>
+URL		  : ${url}<br>
+Exception : ${exception}<br>
+
+<a href="/AdAuction/">WELCOME PAGE</a>
 </body>
 </html>

@@ -6,17 +6,19 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.project.model.Auction;
-
-import sendmail.ProduceMail;
+import com.project.model.User;
+import com.project.sendmail.ProduceMail;
 
 
 @Repository("auctionDao")
 public class AuctionDaoImpl extends AbstractDao<Integer,Auction> implements AuctionDao {
 
-	final String url="192.168.1.6:8085/AdAuction/user/paymets";
+	final String url="http://adauction.cloud.cms500.com/AdAuction/user/paymets";
 	@Override
 	public void scheduleAuction(Auction data) {
 		getSession().save(data);
@@ -60,6 +62,16 @@ public class AuctionDaoImpl extends AbstractDao<Integer,Auction> implements Auct
 				this.endAuction(a);
 			}
 		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Auction> getAucbyEmail(String email) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("highbidder", email));
+		List<Auction> auclist=crit.list();
+		return auclist;
 		
 	}
 	

@@ -1,9 +1,7 @@
 package com.project.dao;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +9,6 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.project.model.State;
 import com.project.model.User;
 import com.project.model.UserProfileType;

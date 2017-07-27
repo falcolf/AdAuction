@@ -17,6 +17,11 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
+
+<script>
+		alert("ALL THE TIME FIELDS STRICTLY FOLLOW UTC");
+</script>
+
 <jsp:directive.include file = "adminnav.jsp" />
 <div class="testbox">
   <h1>New Entry</h1>
@@ -44,7 +49,12 @@
 <br><br><br>
 <hr>
 ${message }
-	
+<br>
+<br>
+TIME IN <b>UTC</b> FORMAT
+<br>
+<br>
+		
 
 </body>
 </html>

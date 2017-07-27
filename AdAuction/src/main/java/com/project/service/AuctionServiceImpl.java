@@ -50,4 +50,9 @@ public class AuctionServiceImpl implements AuctionService{
 		
 	}
 
+	@Override
+	public List<Auction> getAucByEmail(String email) {
+		return dao.getAucbyEmail(email);
+	}
+
 }

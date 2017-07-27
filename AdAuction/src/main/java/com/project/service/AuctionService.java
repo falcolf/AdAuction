@@ -11,4 +11,6 @@ public interface AuctionService {
 	public void updateBid(Auction data);
 	public List<Auction> getAllAuc();
 	public void refreshList();
+	public List<Auction> getAucByEmail(String email);
+	
 }

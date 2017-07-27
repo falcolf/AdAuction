@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Parth Agarwal">
 
     <title>AdAuction</title>
 
@@ -22,6 +22,11 @@
     <link href="<c:url value='/static/css/animate.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/style.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/color/default.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/team.css' />" rel="stylesheet"></link>
+    
+    <link rel="icon" href="/AdAuction/static/img/fav.png">
+    <link rel="shortcut icon" href="/AdAuction/static/img/fav.png">
+    
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -43,9 +48,8 @@
 				
 
 				<div class="col-md-12">
-									<a href="login" class="btn btn-skin btn-lg btn-scroll">Login</a>
-									<a href="signup" class="btn btn-skin btn-lg btn-scroll">Register</a>
-					
+									<a href="login" class="btn btn-skin btn-lg btn-scroll" style="width: 100px ; height: 50px">Login</a>
+									<a href="signup" class="btn btn-skin btn-lg btn-scroll" style="width: 120px; height: 50px">Register</a>
 				</div>
 
 			</a>
@@ -59,28 +63,26 @@
                               <div class="container">
                                     <div class="row">
                                           <div class="col-md-12">
-                         
-                                          <!-- Brand and toggle get grouped for better mobile display -->
-                                          <div class="navbar-header">
-                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                                                <i class="fa fa-bars"></i>
+                         					<!-- Brand and toggle get grouped for better mobile display -->
+                                       		<div class="navbar-header">
+                                            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                                	<i class="fa fa-bars"></i>
                                                 </button>
-                                          </div>
-                                                      <!-- Collect the nav links, forms, and other content for toggling -->
-                                                      <div class="collapse navbar-collapse" id="menu">
-                                                            <ul class="nav navbar-nav">
-                                                                  <li class="active"><a href="#intro">Home</a></li>
-                                                                  <li><a href="#about">About Us</a></li>
-														          <li><a href="#team">Team</a></li>                                <li><a href="#contact">Contact</a></li>
-                                                            </ul>
-                                                      </div>
-                                                      <!-- /.Navbar-collapse -->
-                             
-                                          </div>
+                                          	</div>
+                                            <!-- Collect the nav links, forms, and other content for toggling -->
+                                            <div class="collapse navbar-collapse" id="menu">
+                                            	<ul class="nav navbar-nav">
+                                                	<li class="active"><a href="#intro">Home</a></li>
+                                                    <li><a href="#about">About Us</a></li>
+													<li><a href="#team">Team</a></li>                                
+													<li><a href="#contact">Contact</a></li>
+                                                </ul>
+                                            </div>
+                             			</div>
                                     </div>
                               </div>
                               <!-- /.container -->
-                        </nav>
+           </nav>
     </div> 
     <!-- /Navigation -->  
 
@@ -89,14 +91,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					
 						<div class="section-heading text-center">
 						<div class="wow bounceInDown" data-wow-delay="0.2s">
 							<h2>We are AdAuctioners</h2>
 						</div>
 						<p class="wow bounceInUp" data-wow-delay="0.3s">We Help people get their Ads on popular websites...</p>
 						</div>
-					
 				</div>
 			</div>
 		</div>
@@ -104,7 +104,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-				
 					<img src="/AdAuction/static/img/img1.jpg" class="img-responsive img-rounded" alt="" />
 				</div>		
 				<div class="col-md-6">
@@ -118,46 +117,75 @@
 			</div>		
 		</div>
 	</section>
-	<!-- /Section: about -->
-	
-	
-	
-	<!-- Section: gallery -->
+	<!-- Section: Team -->
     <section id="team" class="home-section text-center bg-gray">
-
-			<div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading">
-						<h2>Team</h2>
-						<p>Minds behind AdAuction...</p>
-					</div>
+						<div class="section-heading">
+							<h2>Team</h2>
+								<p>Minds behind AdAuction...</p>
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
-
-		<div class="container">
-			<div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" >
-					<div class="wow bounceInUp" data-wow-delay="0.4s">
-                    <div id="owl-works" class="owl-carousel">
-                        
-                        <div class="item">
-                        </div>
-                        <div class="item">
-                        	<a href="/AdAuction/static/img/gallery/1.jpg" title="Parth Agarwal : RA1511003010326" data-lightbox-gallery="gallery1"><img src="/AdAuction/static/img/gallery/1.jpg" class="img-circle" alt="Parth Agarwal"></a>
-                        </div>
-                        <div class="item">
-                        	<a href="/AdAuction/static/img/gallery/2.jpg" title="Dhruve Moudgil: RA1511003010346" data-lightbox-gallery="gallery1"><img src="/AdAuction/static/img/gallery/2.jpg" class="img-circle " alt="Dhruve Moudgil"></a>
-                        </div>
-                       
-                    </div>
-					</div>
-                </div>
-            </div>
 		</div>
+			
+		<div class="container"  >
+			<div class="wow bounceInUp" data-wow-delay="0.4s">
+            	<div id="owl-works" class="owl-carousel" >
+                	<div class="container">
+                    	<div class="row">
+                        	<div class="heading-title text-center">
+                            	<div class="col-md-8 col-sm-8 col-xs-12">
+                            		<div class="team-member">
+                                		<div class="team-img" align="center">
+                                    		<img src="/AdAuction/static/img/gallery/1.jpg" class="img-responsive img-circle" alt="Parth Agarwal" width="30%">
+                                		</div>
+                                		<div class="team-hover">
+                                    		<div class="desk">
+                                        		<h4>Hey..!</h4>
+                                        		<p>I Designed The Web-App..!</p>
+                                    		</div>
+                                    		<div class="s-link">
+                                    			<a href="/AdAuction/static/img/gallery/1.jpg" title="Parth Agarwal : Web-Developer" data-lightbox-gallery="gallery1"><i class="fa fa-camera"></i></a>
+                                        	</div>
+                                		</div>
+                            		</div>
+                            		<div class="team-title">
+                               			<h5>Parth Agarwal</h5>
+                                		<span>Web Developer</span>
+                            		</div>
+                        		</div>
+                       			<div class="col-md-8 col-sm-8 col-xs-12">
+                            		<div class="team-member">
+                                			<div class="team-img" align="center">
+                                    			<img src="/AdAuction/static/img/gallery/2.jpg"  class="img-responsive img-circle" alt="Dhruve Moudgil" width="30%"> 
+                                			</div>
+                                			<div class="team-hover">
+                                    			<div class="desk">
+                                        			<h4>Hey..!</h4>
+                                        			<p>I Designed the Android App..! </p>
+                                    			</div>
+                                    			<div class="s-link">
+                                        			<a href="/AdAuction/static/img/gallery/2.jpg" title="Dhruve Moudgil : App-Developer" data-lightbox-gallery="gallery1"><i class="fa fa-camera"></i></a>
+                                        		</div>
+                                			</div>
+                            			</div>
+                           				<div class="team-title">
+                                			<h5>Dhruve Moudgil</h5>
+                                			<span>Android Developer</span>
+                            			</div>
+                        			</div>
+                       			</div>
+                        	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+           
+	
 	
 
 	</section>
@@ -170,39 +198,31 @@
     <section id="contact" class="home-section text-center">
 		<div class="heading-contact">
 			<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-offset-2">
-					
-					<div class="section-heading">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<h2>Emails are always welcome</h2>
+				<div class="row">
+					<div class="col-lg-8 col-md-offset-2">
+						<div class="section-heading">
+							<div class="wow bounceInDown" data-wow-delay="0.4s">
+								<h2>Emails are always welcome</h2>
+							</div>
+						</div>
 					</div>
-					
-					</div>
-					
 				</div>
 			</div>
-			</div>
 		</div>
+		
 		<div class="container">
-
-    <div class="row">
-        <div class="col-lg-8 col-md-offset-2">
-            <div class="form-wrapper marginbot-50">
-                
-			<div class="text-center">
-					<p class="lead"><i class="fa fa-envelope	"></i> Email us at adauction@gmail.com</p>
+			<div class="row">
+        		<div class="col-lg-8 col-md-offset-2">
+            		<div class="form-wrapper marginbot-50">
+            			<div class="text-center">
+							<p class="lead"><i class="fa fa-envelope"></i> Email us at adauction@gmail.com</p>
+						</div>
+					</div>
+				</div>	
 			</div>
-			
-        
-
-
-        </div>
-
-    </div>	
-
 		</div>
 	</section>
+	
 	<!-- /Section: contact -->
 
 	<footer>

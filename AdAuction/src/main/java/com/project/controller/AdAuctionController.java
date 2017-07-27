@@ -15,10 +15,14 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.project.dto.AucData;
 import com.project.dto.NewUser;
 import com.project.dto.Otpact;
@@ -28,12 +32,13 @@ import com.project.model.State;
 import com.project.model.User;
 import com.project.service.AuctionService;
 import com.project.service.UserService;
-import sendmail.ProduceMail;
+import com.project.sendmail.ProduceMail;
 
 @Controller
 public class AdAuctionController {
 	
-	final String otpurl="192.168.1.6:8085/AdAuction/activationid=";
+	final String otpurl="http://adauction.cloud.cms500.com/AdAuction/activationid=";
+	
 	User accessor;
 	int uid=0;
 	
@@ -47,6 +52,7 @@ public class AdAuctionController {
 	public String homePage(ModelMap model) {
 		return "welcome";
 	}
+	
 	
 	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
@@ -159,7 +165,7 @@ public class AdAuctionController {
 	@ModelAttribute("adtypes") //To Enter Values to Tech Filed Box
 	public List<String> initTech(){
 		List<String> adtypes=new ArrayList<String>();
-		adtypes.add("popups");adtypes.add("banners");
+		adtypes.add("popups");adtypes.add("banners");adtypes.add("video-ads");
 		return adtypes;
 	}
 	
@@ -203,6 +209,14 @@ public class AdAuctionController {
 			return "adminDispatcher"; //change appropriately
 	}
 	
+	@RequestMapping(value="/admin/auctions",method=RequestMethod.GET)
+	public String getAllAuctions(ModelMap model){
+		List<Auction> aucs=new ArrayList<Auction>();
+		aucs=auctionService.getAllAuc();
+		model.addAttribute("aucs",aucs);
+		return "viewall";
+	}
+	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userPage(ModelMap model) {
 		
@@ -211,13 +225,22 @@ public class AdAuctionController {
 			List<Auction> aucs=new ArrayList<Auction>();
 			aucs=auctionService.getAllAuc();
 			model.addAttribute("aucs",aucs);
-			model.addAttribute("user", accessor.getName());
+			model.addAttribute("id", accessor.getId());
 		}catch(Exception e){
 			model.addAttribute("message","There was some error completing request : "+e);
 			return "user";
 		}
 		
 		return "user";
+	}
+	
+	@RequestMapping(value="/user/mybids",method=RequestMethod.GET)
+	public String getMyBids(ModelMap model){
+		accessor=userService.getUserDetails(this.getAccesser());
+		model.addAttribute("accessor", accessor);
+		List<Auction> auclist=auctionService.getAucByEmail(accessor.getEmail());
+		model.addAttribute("aucs",auclist);
+		return "mybids";
 	}
 	
 	
@@ -272,6 +295,10 @@ public class AdAuctionController {
 	public String paymentsPage(ModelMap model) {
 		return "payments";
 	}
+	
+	
+
+
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
